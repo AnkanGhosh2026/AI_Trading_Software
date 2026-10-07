@@ -29,14 +29,22 @@ function Auth({ onAuth, onBack }) {
     <div className="auth">
       <button className="ghost auth-back" onClick={onBack}>&larr; Back</button>
       <form className="card auth-card-margin" onSubmit={submit}>
-      <h1>Signal Desk</h1><div className="mute">{mode === "login" ? "Sign in to your trading workspace." : "Create your account. Passwords need 8+ characters."}</div>
-      <input placeholder="Username" autoFocus value={f.username} onChange={(e) => setF({ ...f, username: e.target.value })} />
-      <input type="password" placeholder="Password" value={f.password} onChange={(e) => setF({ ...f, password: e.target.value })} />
-      {err && <div className="err">{err}</div>}
-      <button className="btn" disabled={busy}>{mode === "login" ? "Sign in" : "Create account"}</button>
-      <button type="button" className="ghost" onClick={() => { setMode(mode === "login" ? "register" : "login"); setErr(""); }}>
-        {mode === "login" ? "New here? Create an account" : "Have an account? Sign in"}</button>
-    </form></div>
+        <h1>Signal Desk</h1><div className="mute">{mode === "login" ? "Sign in to your trading workspace." : "Create your account. Passwords need 8+ characters."}</div>
+        <input placeholder="Username" autoFocus value={f.username} onChange={(e) => setF({ ...f, username: e.target.value })} />
+        <input type="password" placeholder="Password" value={f.password} onChange={(e) => setF({ ...f, password: e.target.value })} />
+        {err && <div className="err">{err}</div>}
+        <button className="btn" disabled={busy}>{mode === "login" ? "Sign in" : "Create account"}</button>
+        <button type="button" className="ghost" onClick={() => { setMode(mode === "login" ? "register" : "login"); setErr(""); }}>
+          {mode === "login" ? "New here? Create an account" : "Have an account? Sign in"}</button>
+
+        {mode === "login" && (
+          <div style={{ marginTop: '16px', padding: '12px', background: 'var(--panel2)', borderRadius: '8px', fontSize: '13px', border: '1px solid var(--line)' }}>
+            <strong style={{ color: 'var(--text)' }}>Demo Credentials:</strong>
+            <div style={{ marginTop: '6px', color: 'var(--mute)' }}>Admin: <code>admin</code> / <code>admin12345</code></div>
+            <div style={{ marginTop: '4px', color: 'var(--mute)' }}>User: <code>testuser</code> / <code>12345678</code></div>
+          </div>
+        )}
+      </form></div>
   );
 }
 
@@ -83,7 +91,7 @@ function MainShell({ user }) {
           )}
         </div>
       </aside>
-      
+
       <div className="body">
         <header className="bar">
           <SearchBar onSelect={(s) => nav("terminal", s)} />
@@ -112,9 +120,9 @@ function MainShell({ user }) {
 export default function App() {
   const [user, setUser] = useState(null), [ready, setReady] = useState(!token);
   const [showAuth, setShowAuth] = useState(false);
-  useEffect(() => { if (token) api("/api/auth/me").then(setUser).catch(() => {}).finally(() => setReady(true)); }, []);
+  useEffect(() => { if (token) api("/api/auth/me").then(setUser).catch(() => { }).finally(() => setReady(true)); }, []);
   if (!ready) return null;
-  
+
   if (user) return <MainShell user={user} />;
   if (showAuth) return <Auth onAuth={setUser} onBack={() => setShowAuth(false)} />;
   return <LandingPage onLoginClick={() => setShowAuth(true)} />;
