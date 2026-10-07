@@ -1,0 +1,12 @@
+fastapi
+uvicorn[standard]
+yfinance
+pandas
+numpy
+anthropic
+groq
+# Optional, enable real pretrained models (heavier install):
+# torch
+# chronos-forecasting
+# transformers
+pyjwt
