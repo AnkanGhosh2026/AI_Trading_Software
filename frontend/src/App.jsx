@@ -11,10 +11,11 @@ import Alerts from "./pages/Alerts.jsx";
 import Screener from "./pages/Screener.jsx";
 import Settings from "./pages/Settings.jsx";
 import Admin from "./pages/Admin.jsx";
+import LandingPage from "./pages/LandingPage.jsx";
 
 const DEF_WL = ["RELIANCE.NS", "TCS.NS", "HDFCBANK.NS", "INFY.NS", "^NSEI", "AAPL", "BTC-USD"];
 
-function Auth({ onAuth }) {
+function Auth({ onAuth, onBack }) {
   const [mode, setMode] = useState("login"), [f, setF] = useState({ username: "", password: "" }), [err, setErr] = useState(""), [busy, setBusy] = useState(false);
   const submit = async (e) => {
     e.preventDefault(); setBusy(true); setErr("");
@@ -25,7 +26,9 @@ function Auth({ onAuth }) {
     } catch (x) { setErr(x.message); } finally { setBusy(false); }
   };
   return (
-    <div className="auth"><form className="card" onSubmit={submit}>
+    <div className="auth">
+      <button className="ghost auth-back" onClick={onBack}>&larr; Back</button>
+      <form className="card auth-card-margin" onSubmit={submit}>
       <h1>Signal Desk</h1><div className="mute">{mode === "login" ? "Sign in to your trading workspace." : "Create your account. Passwords need 8+ characters."}</div>
       <input placeholder="Username" autoFocus value={f.username} onChange={(e) => setF({ ...f, username: e.target.value })} />
       <input type="password" placeholder="Password" value={f.password} onChange={(e) => setF({ ...f, password: e.target.value })} />
@@ -108,7 +111,11 @@ function MainShell({ user }) {
 
 export default function App() {
   const [user, setUser] = useState(null), [ready, setReady] = useState(!token);
+  const [showAuth, setShowAuth] = useState(false);
   useEffect(() => { if (token) api("/api/auth/me").then(setUser).catch(() => {}).finally(() => setReady(true)); }, []);
   if (!ready) return null;
-  return user ? <MainShell user={user} /> : <Auth onAuth={setUser} />;
+  
+  if (user) return <MainShell user={user} />;
+  if (showAuth) return <Auth onAuth={setUser} onBack={() => setShowAuth(false)} />;
+  return <LandingPage onLoginClick={() => setShowAuth(true)} />;
 }

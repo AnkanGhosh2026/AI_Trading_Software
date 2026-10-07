@@ -6,8 +6,12 @@ export function setToken(t) {
   else localStorage.removeItem("token");
 }
 
+const BASE_URL = import.meta.env.VITE_API_URL || "";
+
 export async function api(url, body, method) {
-  const r = await fetch(url, {
+  const fullUrl = url.startsWith("http") ? url : `${BASE_URL}${url}`;
+  
+  const r = await fetch(fullUrl, {
     method: method || (body ? "POST" : "GET"),
     headers: { "Content-Type": "application/json", ...(token ? { Authorization: `Bearer ${token}` } : {}) },
     body: body ? JSON.stringify(body) : undefined,
