@@ -1,0 +1,159 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+<meta charset="utf-8">
+<title>Signal Desk POC</title>
+<style>
+body { font-family: 'Calibri', 'Arial', sans-serif; line-height: 1.6; color: #333; margin: 40px; }
+h1 { color: #1a365d; font-size: 28px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; }
+h2 { color: #2b6cb0; font-size: 22px; margin-top: 30px; }
+h3 { color: #2d3748; font-size: 18px; margin-top: 20px; }
+p { font-size: 14px; margin-bottom: 12px; }
+ul { margin-bottom: 16px; }
+li { font-size: 14px; margin-bottom: 6px; }
+strong { font-weight: bold; }
+code { background-color: #f7fafc; padding: 2px 4px; border-radius: 4px; font-family: 'Courier New', Courier, monospace; font-size: 13px; }
+</style>
+</head>
+<body>
+
+<h1>Signal Desk: Proof of Concept (PoC) Documentation</h1>
+
+<h2>1. Executive Summary</h2>
+<p><strong>Signal Desk</strong> is a next-generation AI-powered trading platform designed to bridge the gap between institutional-grade algorithmic tools and retail trading accessibility. This Proof of Concept (PoC) demonstrates a functional, full-stack application that leverages machine learning (ML) models and large language models (LLMs) to provide real-time market analysis, sentiment tracking, and price forecasting.</p>
+
+<p>The platform is built on a high-performance stack:</p>
+<ul>
+    <li><strong>Frontend:</strong> React 18 + Vite, featuring a sleek, dark-themed glassmorphism UI for a professional trading experience.</li>
+    <li><strong>Backend:</strong> FastAPI (Python) for ultra-low latency data streaming and model inference.</li>
+    <li><strong>Data & AI:</strong> Integration with <code>yfinance</code> for market data, FinBERT for sentiment analysis, and Chronos-Bolt for time-series forecasting.</li>
+</ul>
+
+<h2>2. Core Features & Capabilities</h2>
+
+<h3>2.1. Advanced Trading Terminal</h3>
+<ul>
+    <li><strong>Interactive Candlestick Charts:</strong> Built-in charting with real-time plotting of Open, High, Low, Close (OHLC) data.</li>
+    <li><strong>Technical Indicators:</strong> Instantly overlay Simple Moving Averages (SMA 20, SMA 50) and Bollinger Bands.</li>
+    <li><strong>Automated Level Detection:</strong> Automatic plotting of key support and resistance levels.</li>
+    <li><strong>Pattern Recognition:</strong> Real-time detection of candlestick patterns across recent sessions.</li>
+</ul>
+
+<h3>2.2. AI Predictive Modeling & Forecasting</h3>
+<ul>
+    <li><strong>Chronos-Bolt Integration:</strong> Utilizes pretrained foundation models for time-series forecasting to predict future price action.</li>
+    <li><strong>Statistical Fallback:</strong> If deep learning models are unavailable, the system gracefully degrades to robust statistical drift and volatility models.</li>
+    <li><strong>Visual Forecast Bands:</strong> Forecasts are plotted directly onto the main chart as an interactive overlay showing 10th-90th percentile probability ranges.</li>
+</ul>
+
+<h3>2.3. Real-Time News & Sentiment Analysis</h3>
+<ul>
+    <li><strong>FinBERT Processing:</strong> Automatically ingests breaking financial news and processes it through FinBERT to calculate a sentiment score (Bullish, Bearish, or Neutral).</li>
+    <li><strong>Keyword Scoring Fallback:</strong> A robust rule-based NLP fallback ensures sentiment is always calculated even if heavy transformer models are offline.</li>
+</ul>
+
+<h3>2.4. Backtesting Lab & Strategy Screener</h3>
+<ul>
+    <li><strong>Instant Backtesting:</strong> Test moving average crossover strategies with one click.</li>
+    <li><strong>Detailed Metrics:</strong> Returns institutional metrics including Sharpe Ratio, Maximum Drawdown, and comparison against a standard Buy & Hold strategy.</li>
+    <li><strong>Market Screener:</strong> Scan the entire market or custom watchlists for specific setups (e.g., RSI oversold, MACD crossovers, high volume breakouts).</li>
+</ul>
+
+<h3>2.5. Role-Based Access & Workspace Management</h3>
+<ul>
+    <li><strong>Admin vs. User Tiers:</strong> Admins can manage the platform and users, while users get isolated, personalized workspaces.</li>
+    <li><strong>Cloud Syncing:</strong> Watchlists and chart preferences (default periods, active indicators) are synced to the user's account.</li>
+</ul>
+
+<h2>3. Key Use Cases</h2>
+
+<h3>Use Case A: The Algorithmic Swing Trader</h3>
+<p><strong>Scenario:</strong> A trader wants to identify medium-term trends without writing complex Python scripts.</p>
+<p><strong>Execution:</strong></p>
+<ol>
+    <li>The user opens the <strong>Screener</strong> to filter for stocks in their watchlist currently showing a "downtrend" but approaching a major "support" level.</li>
+    <li>They click into the <strong>Terminal</strong> for a specific asset (e.g., NVDA).</li>
+    <li>They activate the <strong>AI Forecast</strong> overlay to see the model's 30-day projection.</li>
+    <li>They run a quick <strong>Backtest</strong> on the SMA 20/50 crossover to see historical performance before entering the trade.</li>
+</ol>
+
+<h3>Use Case B: The News-Driven Day Trader</h3>
+<p><strong>Scenario:</strong> The market opens and breaking news is dropping rapidly during earnings season.</p>
+<p><strong>Execution:</strong></p>
+<ol>
+    <li>The user keeps the <strong>News Feed</strong> tab open.</li>
+    <li>As headlines drop, the backend FinBERT model scores the sentiment in milliseconds.</li>
+    <li>The user sees a high-confidence "Bullish" score on an Apple (AAPL) headline and immediately switches to the <strong>Dashboard</strong> to monitor the asset's intraday momentum.</li>
+</ol>
+
+<h3>Use Case C: The Portfolio Manager</h3>
+<p><strong>Scenario:</strong> An analyst needs a high-level view of daily market movers and general AI sentiment.</p>
+<p><strong>Execution:</strong></p>
+<ol>
+    <li>The user logs in and views the <strong>Dashboard</strong>.</li>
+    <li>The UI instantly displays Top Gainers and Top Losers from their curated watchlist.</li>
+    <li>The "Watchlist Overview" table aggregates current price, daily change %, trend, and an aggregated AI Signal (Bullish/Bearish/Neutral) for every asset at a glance.</li>
+</ol>
+
+<h2>4. User Journey: How to Use Signal Desk</h2>
+
+<h3>Step 1: Authentication & Onboarding</h3>
+<ul>
+    <li><strong>Landing Page:</strong> Users arrive at a professional, interactive landing page showcasing platform capabilities.</li>
+    <li><strong>Login:</strong> Users enter their credentials (e.g., <code>testuser</code> / <code>12345678</code>). Administrators can log in using <code>admin</code> / <code>admin12345</code> to access user-management panels.</li>
+</ul>
+
+<h3>Step 2: The Dashboard Overview</h3>
+<ul>
+    <li>Upon login, the user lands on the <strong>Dashboard</strong>.</li>
+    <li>They view the KPI cards at the top (tracking major indices).</li>
+    <li>They scroll down to review the <strong>Watchlist Overview</strong>, noting which stocks have an overarching "Bullish" AI Signal.</li>
+</ul>
+
+<h3>Step 3: Deep Dive in the Terminal</h3>
+<ul>
+    <li>The user clicks on a ticker (e.g., <code>RELIANCE.NS</code>) from the dashboard, transporting them to the <strong>Terminal</strong>.</li>
+    <li><strong>Charting:</strong> They use the top toggles to switch the timeframe from <code>3mo</code> to <code>1y</code>.</li>
+    <li><strong>Indicators:</strong> They toggle on <code>SMA 20</code> and <code>Bollinger Bands</code>.</li>
+    <li><strong>AI Analysis:</strong> They click the <code>AI Analyzer</code> tab below the chart to generate an LLM-driven summary of current price action and support/resistance levels.</li>
+</ul>
+
+<h3>Step 4: Setup Alerts & Manage Portfolio</h3>
+<ul>
+    <li>If the user likes a setup but isn't ready to buy, they navigate to the <strong>Alerts</strong> tab and set a price-target trigger.</li>
+    <li>They can review their hypothetical performance in the <strong>Portfolio</strong> tab.</li>
+</ul>
+
+<h3>Step 5: Customizing the Experience</h3>
+<ul>
+    <li>The user navigates to <strong>Settings</strong>.</li>
+    <li>They change their default chart period to <code>6mo</code> and set <code>AI Forecast</code> to be enabled by default on all new charts.</li>
+    <li>These preferences are saved seamlessly to their profile.</li>
+</ul>
+
+<h2>5. Technical Requirements & Deployment</h2>
+<p>To run this PoC locally:</p>
+
+<ol>
+    <li>
+        <strong>Start the Backend:</strong>
+        <pre><code>
+cd backend
+python -m venv .venv
+.\.venv\Scripts\activate
+pip install -r requirements.txt
+uvicorn main:app --reload
+        </code></pre>
+    </li>
+    <li>
+        <strong>Start the Frontend:</strong>
+        <pre><code>
+cd frontend
+npm install
+npm run dev
+        </code></pre>
+    </li>
+</ol>
+<p><em>The frontend will proxy /api requests to localhost:8000 automatically.</em></p>
+
+</body>
+</html>

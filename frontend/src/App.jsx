@@ -41,7 +41,7 @@ function Auth({ onAuth, onBack }) {
           <div style={{ marginTop: '16px', padding: '12px', background: 'var(--panel2)', borderRadius: '8px', fontSize: '13px', border: '1px solid var(--line)' }}>
             <strong style={{ color: 'var(--text)' }}>Demo Credentials:</strong>
             <div style={{ marginTop: '6px', color: 'var(--mute)' }}>Admin: <code>admin</code> / <code>admin12345</code></div>
-            <div style={{ marginTop: '4px', color: 'var(--mute)' }}>User: <code>testuser</code> / <code>12345678</code></div>
+            {/* <div style={{ marginTop: '4px', color: 'var(--mute)' }}>User: <code>testuser</code> / <code>12345678</code></div> */}
           </div>
         )}
       </form></div>
