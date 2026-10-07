@@ -67,41 +67,10 @@ export default function Settings({ user, wl, setWl, prefs, setPrefs, onLogout })
         </div>
       </div>
 
-      {/* API Status */}
-      <div className="card settings-card">
-        <h3>AI Provider Status</h3>
-        <div className="settings-row">
-          <span className="settings-label">Groq API</span>
-          <span className="mute" style={{ fontSize: 13 }}>
-            Configured server-side via <code>GROQ_API_KEY</code> in <code>.env</code>
-          </span>
-        </div>
-        <div className="settings-row">
-          <span className="settings-label">Anthropic API</span>
-          <span className="mute" style={{ fontSize: 13 }}>
-            Configured server-side via <code>ANTHROPIC_API_KEY</code> in <code>.env</code>
-          </span>
-        </div>
-        <div className="settings-row">
-          <span className="settings-label">Forecasting</span>
-          <span className="mute" style={{ fontSize: 13 }}>
-            Uses Chronos-Bolt if PyTorch is installed, else statistical fallback
-          </span>
-        </div>
-        <div className="settings-row">
-          <span className="settings-label">Sentiment</span>
-          <span className="mute" style={{ fontSize: 13 }}>
-            Uses FinBERT if Transformers installed, else keyword scoring
-          </span>
-        </div>
-      </div>
-
       {/* About */}
       <div className="card settings-card">
         <h3>About Signal Desk</h3>
         <div className="settings-row"><span className="settings-label">Version</span><span>2.0</span></div>
-        <div className="settings-row"><span className="settings-label">Backend</span><span>FastAPI + yfinance</span></div>
-        <div className="settings-row"><span className="settings-label">Frontend</span><span>React 18 + Vite + lightweight-charts</span></div>
         <p className="note" style={{ marginTop: 14 }}>
           For research and education only. Not investment advice. Forecasts are uncertain and past backtests do not predict future results.
         </p>
